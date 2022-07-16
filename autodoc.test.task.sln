@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "autodoc.tasks.api", "src\presentation\autodoc.tasks.api\autodoc.tasks.api.csproj", "{676A3539-0396-4205-AE9E-A2380390B5C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E828BF47-4822-4B18-A246-2D937C030423}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C22ED8CE-4D94-4504-A26F-45B029622DC1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "autodoc.tasks.domain", "src\core\autodoc.tasks.domain\autodoc.tasks.domain.csproj", "{64EF49BE-FC09-4AD5-9A46-23A75C1C6D15}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "autodoc.tasks.application", "src\core\autodoc.tasks.application\autodoc.tasks.application.csproj", "{388364CE-F94A-4D15-8940-0BE5A68FF095}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{1945E8CC-54E3-4E7A-8ADA-C26CF5EB7C66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{8956AF78-9ABB-4637-9CEE-A9D3359B5A60}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "presentation", "presentation", "{46EA4FE3-950C-4857-A76B-5A5E0BE13692}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "autodoc.tasks.persistence", "src\infrastructure\autodoc.tasks.persistence\autodoc.tasks.persistence.csproj", "{3B95E5C6-37C0-46AB-9536-8A32E24B43AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{676A3539-0396-4205-AE9E-A2380390B5C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{676A3539-0396-4205-AE9E-A2380390B5C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{676A3539-0396-4205-AE9E-A2380390B5C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{676A3539-0396-4205-AE9E-A2380390B5C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64EF49BE-FC09-4AD5-9A46-23A75C1C6D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64EF49BE-FC09-4AD5-9A46-23A75C1C6D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64EF49BE-FC09-4AD5-9A46-23A75C1C6D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64EF49BE-FC09-4AD5-9A46-23A75C1C6D15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{388364CE-F94A-4D15-8940-0BE5A68FF095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{388364CE-F94A-4D15-8940-0BE5A68FF095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{388364CE-F94A-4D15-8940-0BE5A68FF095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{388364CE-F94A-4D15-8940-0BE5A68FF095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B95E5C6-37C0-46AB-9536-8A32E24B43AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B95E5C6-37C0-46AB-9536-8A32E24B43AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B95E5C6-37C0-46AB-9536-8A32E24B43AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B95E5C6-37C0-46AB-9536-8A32E24B43AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{676A3539-0396-4205-AE9E-A2380390B5C7} = {46EA4FE3-950C-4857-A76B-5A5E0BE13692}
+		{64EF49BE-FC09-4AD5-9A46-23A75C1C6D15} = {1945E8CC-54E3-4E7A-8ADA-C26CF5EB7C66}
+		{388364CE-F94A-4D15-8940-0BE5A68FF095} = {1945E8CC-54E3-4E7A-8ADA-C26CF5EB7C66}
+		{1945E8CC-54E3-4E7A-8ADA-C26CF5EB7C66} = {E828BF47-4822-4B18-A246-2D937C030423}
+		{8956AF78-9ABB-4637-9CEE-A9D3359B5A60} = {E828BF47-4822-4B18-A246-2D937C030423}
+		{46EA4FE3-950C-4857-A76B-5A5E0BE13692} = {E828BF47-4822-4B18-A246-2D937C030423}
+		{3B95E5C6-37C0-46AB-9536-8A32E24B43AA} = {8956AF78-9ABB-4637-9CEE-A9D3359B5A60}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {19D967C5-9BA8-4B24-B136-D8B20E8DE940}
+	EndGlobalSection
+EndGlobal
