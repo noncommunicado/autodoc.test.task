@@ -4,6 +4,9 @@ using autodoc.tasks.application.Common.Interfaces;
 
 namespace autodoc.tasks.persistence.Archivator;
 
+/// <summary>
+/// Simple archivator service, use <b>only like transient service</b>!
+/// </summary>
 public sealed class ArchivatorService : IArchivatorService
 {
 	private MemoryStream _memoryStream;

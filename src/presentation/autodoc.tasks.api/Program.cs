@@ -34,7 +34,10 @@ var builder = WebApplication.CreateBuilder(args);
 	builder.Services.AddEndpointsApiExplorer();
 	builder.Services.AddSwaggerGen(x =>
 	{
-		x.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"), true);
+		x.EnableAnnotations();
+		x.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory,
+			$"{Assembly.GetExecutingAssembly().GetName().Name}.xml"),
+			true);
 	});
 
 	// Inject persistence services

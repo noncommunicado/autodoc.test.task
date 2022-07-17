@@ -15,7 +15,7 @@ public static class DependencyInjection
 		services.AddDbContext<IMainDbContext, MainDbContext>(x => x.UseSqlServer(
 			configuration.GetConnectionString("Main")));
 		services.AddScoped<ITaskFileManager, TaskFileManager>();
-		services.AddScoped<IArchivatorService, ArchivatorService>();
+		services.AddTransient<IArchivatorService, ArchivatorService>();
 		return services;
 	}
 }

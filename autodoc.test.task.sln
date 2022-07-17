@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "autodoc.tasks.api", "src\pr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E828BF47-4822-4B18-A246-2D937C030423}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C22ED8CE-4D94-4504-A26F-45B029622DC1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "autodoc.tasks.domain", "src\core\autodoc.tasks.domain\autodoc.tasks.domain.csproj", "{64EF49BE-FC09-4AD5-9A46-23A75C1C6D15}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "autodoc.tasks.application", "src\core\autodoc.tasks.application\autodoc.tasks.application.csproj", "{388364CE-F94A-4D15-8940-0BE5A68FF095}"
