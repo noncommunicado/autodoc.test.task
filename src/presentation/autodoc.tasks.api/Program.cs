@@ -1,7 +1,11 @@
 using System.Reflection;
+using autodoc.tasks.api.Middlewares;
 using autodoc.tasks.application.Common.Interfaces;
+using autodoc.tasks.application.CQRS.TaskStatus.Commands;
+using autodoc.tasks.application.Mappings;
 using autodoc.tasks.persistence;
 using autodoc.tasks.persistence.DbContexts.MainDb;
+using MediatR;
 using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
 using Serilog.Events;
@@ -25,12 +29,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Configure Services
 {
+	builder.Services.AddScoped<ExceptionMiddleware>();
 	builder.Services.AddControllers();
 	builder.Services.AddEndpointsApiExplorer();
-	builder.Services.AddSwaggerGen();
+	builder.Services.AddSwaggerGen(x =>
+	{
+		x.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"), true);
+	});
 
 	// Inject persistence services
 	builder.Services.AddPersistence(builder.Configuration);
+
+	// Add auto-mapper profiles
+	builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(Program)), Assembly.GetAssembly(typeof(TaskStatusMappingProfile)));
+
+	// Add CQRS via MediatR
+	builder.Services.AddMediatR(Assembly.GetAssembly(typeof(Program))!, Assembly.GetAssembly(typeof(CreateTaskStatusCommand))!);
 }
 
 var app = builder.Build();
@@ -56,6 +70,8 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
 	ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

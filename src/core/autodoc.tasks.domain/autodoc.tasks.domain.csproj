@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Dto\TaskFile\" />
-    <Folder Include="Dto\TaskStatus\" />
     <Folder Include="Dto\Task\" />
     <Folder Include="Exceptions\" />
   </ItemGroup>

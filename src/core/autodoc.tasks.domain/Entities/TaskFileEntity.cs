@@ -13,5 +13,8 @@ public class TaskFileEntity : BaseEntity
 
 	public long Size { get; set; } = 0;
 
+	[MaxLength(255)]
+	public string RelativeDiskPath { get; set; }
+
 	public virtual TaskEntity Task { get; set; }
 }
