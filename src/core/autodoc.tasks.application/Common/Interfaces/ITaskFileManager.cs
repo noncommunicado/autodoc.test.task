@@ -9,6 +9,7 @@ public interface ITaskFileManager
 	FileStream GetFileStream(string fileName);
 
 	Task SaveFileAsync(IFormFile file, string uniqName, CancellationToken ct = new());
+	Task SaveFileAsync(byte[] bytes, string uniqName, CancellationToken ct = new());
 
 	void DeleteFile(string fileName);
 

@@ -27,6 +27,15 @@ public sealed class TaskFileManager : ITaskFileManager
 		await file.CopyToAsync(fileStream, ct);
 	}
 
+	public async Task SaveFileAsync(byte[] bytes, string uniqName, CancellationToken ct = new())
+	{
+		if (StoreDirectory.Exists is false) StoreDirectory.Create();
+
+		string filePath = Path.Combine(StoreDirectory.FullName, uniqName);
+		await using FileStream stream = new FileStream(filePath, FileMode.Create);
+		await stream.WriteAsync(bytes, 0, bytes.Length, ct);
+	}
+
 	public void DeleteFile(string fileName)
 	{
 		var fileToDelete = StoreDirectory.GetFiles(fileName).FirstOrDefault();

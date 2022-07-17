@@ -1,5 +1,6 @@
 ﻿using autodoc.tasks.application.Common.Interfaces;
 using autodoc.tasks.domain.Entities;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -11,14 +12,17 @@ namespace autodoc.tasks.persistence.DbContexts.MainDb;
 public class MainDbInitializer
 {
 	private readonly IConfiguration _configuration;
+	private readonly ITaskFileManager _fileManager;
 	private readonly MainDbContext _context;
 
 	public MainDbInitializer(
 		IMainDbContext databaseContext,
+		ITaskFileManager fileManager,
 		IConfiguration configuration
 	)
 	{
 		_context = (MainDbContext)databaseContext;
+		_fileManager = fileManager;
 		_configuration = configuration;
 	}
 
@@ -39,13 +43,18 @@ public class MainDbInitializer
 			List<TaskFileEntity> files = new(5);
 			for (int j = 0; j < rand.Next(0, 6); j++)
 			{
+				Guid fileStorageId = Guid.NewGuid();
 				files.Add(new TaskFileEntity
 				{
 					FileName = $"test_{Guid.NewGuid():N}",
 					FileExtension = "txt",
-					LocalStorageFileId = Guid.NewGuid(),
+					LocalStorageFileId = fileStorageId,
 					Size = rand.Next(10, 10000)
 				});
+
+				byte[] bytes = new byte[rand.Next(10, 51200)];
+				rand.NextBytes(bytes);
+				await _fileManager.SaveFileAsync(bytes, fileStorageId.ToString("N"));
 			}
 
 			await _context.Tasks.AddAsync(new TaskEntity

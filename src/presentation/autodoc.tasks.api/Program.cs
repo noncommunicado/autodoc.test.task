@@ -89,7 +89,10 @@ foreach (var host in builder.Configuration.GetSection("Network:ListenTo").Get<st
 // Init Database
 using (var scope = app.Services.CreateScope())
 {
-	await new MainDbInitializer(scope.ServiceProvider.GetService<IMainDbContext>()!, app.Configuration)
+	await new MainDbInitializer(
+			scope.ServiceProvider.GetService<IMainDbContext>()!,
+			scope.ServiceProvider.GetService<ITaskFileManager>()!,
+			app.Configuration)
 		.InitializeAsync();
 }
 
