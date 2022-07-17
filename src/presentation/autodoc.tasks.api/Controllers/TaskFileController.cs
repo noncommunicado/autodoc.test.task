@@ -52,6 +52,7 @@ public sealed class TaskFileController : ControllerBase
 		if (!provider.TryGetContentType(fileData.FileName, out var contentType))
 			contentType = "application/octet-stream";
 
+		Log.Information($"Task file #{fileId} downloaded");
 		return File(fileData.Stream, contentType, fileData.FileName);
 	}
 
@@ -84,6 +85,8 @@ public sealed class TaskFileController : ControllerBase
 		var bytes = _archivatorService.GetArchiveBytesAndCloseArchive();
 		string taskSubstring = task.Name.Length > 20 ? $"{task.Name.Substring(0, 19)}..." : task.Name;
 		string fileName = $"Файлы задачи ({taskSubstring}).zip";
+
+		Log.Information($"Zip archive of task #{taskId} downloaded");
 		return new FileContentResult(bytes, "application/zip")
 		{
 			FileDownloadName = fileName
@@ -96,6 +99,7 @@ public sealed class TaskFileController : ControllerBase
 	public async Task<IActionResult> Delete(int fileId)
 	{
 		await _mediator.Send(new DeleteTaskFileCommand(fileId));
+		Log.Warning($"File #{fileId} deleted");
 		return Ok();
 	}
 }

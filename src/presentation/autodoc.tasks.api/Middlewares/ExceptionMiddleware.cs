@@ -14,11 +14,15 @@ public class ExceptionMiddleware : IMiddleware
 		{
 			Log.Error(re, re.Message);
 			context.Response.StatusCode = (int)re.StatusCode;
-			await context.Response.WriteAsJsonAsync(new 
+			await context.Response.WriteAsJsonAsync(new
 			{
 				StatusCode = context.Response.StatusCode,
 				Message = re.Message
 			});
+		}
+		catch (Exception ex)
+		{
+			Log.Error(ex, "Unhandled exception");
 		}
 	}
 }

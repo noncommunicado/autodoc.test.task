@@ -6,6 +6,7 @@ using autodoc.tasks.domain.Http.Responses.Pagination;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace autodoc.tasks.api.Controllers;
@@ -48,6 +49,7 @@ public sealed class TaskController : ControllerBase
 	public async Task<IActionResult> Create([FromForm] CreateTaskRequest model)
 	{
 		var createdId = await _mediator.Send(new CreateTaskCommand(model, model.Files));
+		Log.Information($"Task #{createdId} ({model.Name}) created");
 		return Ok(createdId);
 	}
 
@@ -58,6 +60,7 @@ public sealed class TaskController : ControllerBase
 	public async Task<IActionResult> Update([FromBody] UpdateTaskRequest model)
 	{
 		await _mediator.Send(new UpdateTaskCommand(model));
+		Log.Information($"Task #{model.Id} updated");
 		return Ok();
 	}
 
@@ -68,6 +71,7 @@ public sealed class TaskController : ControllerBase
 	public async Task<IActionResult> Delete(int taskId, bool isDeleteFilesToo = false)
 	{
 		await _mediator.Send(new DeleteTaskCommand(taskId, isDeleteFilesToo));
+		Log.Warning($"Task #{taskId} deleted");
 		return Ok();
 	}
 }
