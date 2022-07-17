@@ -41,9 +41,6 @@ namespace autodoc.tasks.persistence.Migrations
                     b.Property<int?>("StatusId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TaskStatusId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
 
@@ -74,10 +71,11 @@ namespace autodoc.tasks.persistence.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("RelativeDiskPath")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<bool>("IsStoredCompressed")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("LocalStorageFileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<long>("Size")
                         .HasColumnType("bigint");
@@ -86,6 +84,9 @@ namespace autodoc.tasks.persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LocalStorageFileId")
+                        .IsUnique();
 
                     b.HasIndex("TaskId");
 

@@ -8,5 +8,5 @@ public interface IMainDbContext
 	DbSet<TaskEntity> Tasks { get; set; }
 	DbSet<TaskStatusEntity> TaskStatuses { get; set; }
 	DbSet<TaskFileEntity> TaskFiles { get; set; }
-	Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+	Task<int> SaveChangesAsync(CancellationToken cancellationToken = new());
 }

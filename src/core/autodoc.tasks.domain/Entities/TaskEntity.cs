@@ -13,7 +13,7 @@ public class TaskEntity : BaseEntity
 	/// </summary>
 	public DateTime? Updated { get; set; }
 
-	public int? TaskStatusId { get; set; }
+	public int? StatusId { get; set; }
 
 	public virtual TaskStatusEntity? Status { get; set; }
 

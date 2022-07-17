@@ -41,10 +41,12 @@ var builder = WebApplication.CreateBuilder(args);
 	builder.Services.AddPersistence(builder.Configuration);
 
 	// Add auto-mapper profiles
-	builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(Program)), Assembly.GetAssembly(typeof(TaskStatusMappingProfile)));
+	builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(Program)),
+		Assembly.GetAssembly(typeof(autodoc.tasks.application.AssemblyInfo)));
 
 	// Add CQRS via MediatR
-	builder.Services.AddMediatR(Assembly.GetAssembly(typeof(Program))!, Assembly.GetAssembly(typeof(CreateTaskStatusCommand))!);
+	builder.Services.AddMediatR(Assembly.GetAssembly(typeof(Program))!,
+		Assembly.GetAssembly(typeof(autodoc.tasks.application.AssemblyInfo))!);
 }
 
 var app = builder.Build();

@@ -12,7 +12,7 @@ using autodoc.tasks.persistence.DbContexts.MainDb;
 namespace autodoc.tasks.persistence.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20220717103751_Init")]
+    [Migration("20220717125138_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,9 +41,6 @@ namespace autodoc.tasks.persistence.Migrations
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<int?>("StatusId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TaskStatusId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("Updated")
@@ -76,10 +73,11 @@ namespace autodoc.tasks.persistence.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("RelativeDiskPath")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<bool>("IsStoredCompressed")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("LocalStorageFileId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<long>("Size")
                         .HasColumnType("bigint");
@@ -88,6 +86,9 @@ namespace autodoc.tasks.persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LocalStorageFileId")
+                        .IsUnique();
 
                     b.HasIndex("TaskId");
 

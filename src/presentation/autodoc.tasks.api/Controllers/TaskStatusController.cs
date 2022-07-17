@@ -11,7 +11,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace autodoc.tasks.api.Controllers;
 
 [ApiController, Route("api/[controller]")]
-public class TaskStatusController : ControllerBase
+public sealed class TaskStatusController : ControllerBase
 {
 	private readonly IMapper _mapper;
 	private readonly IMediator _mediator;

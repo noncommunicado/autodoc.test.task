@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using autodoc.tasks.application.Common.Interfaces;
-using autodoc.tasks.domain.Dto.TaskStatus;
 using autodoc.tasks.domain.Entities;
 using autodoc.tasks.domain.Http.Requests.TaskStatus;
 using AutoMapper;
@@ -9,14 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace autodoc.tasks.application.CQRS.TaskStatus.Commands;
 
-public sealed record CreateTaskStatusCommand : IRequest<int>
-{
-	public CreateTaskStatusRequest Model { get; }
-	public CreateTaskStatusCommand(CreateTaskStatusRequest model)
-	{
-		Model = model;
-	}
-}
+public sealed record CreateTaskStatusCommand(CreateTaskStatusRequest Model) : IRequest<int>;
 
 public sealed class CreateTaskStatusCommandHandler : IRequestHandler<CreateTaskStatusCommand, int>
 {

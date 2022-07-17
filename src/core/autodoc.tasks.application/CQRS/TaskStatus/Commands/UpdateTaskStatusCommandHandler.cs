@@ -6,14 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace autodoc.tasks.application.CQRS.TaskStatus.Commands;
 
-public sealed record UpdateTaskStatusCommand : IRequest
-{
-	public UpdateTaskStatusRequest Model { get; }
-	public UpdateTaskStatusCommand(UpdateTaskStatusRequest model)
-	{
-		Model = model;
-	}
-}
+public sealed record UpdateTaskStatusCommand(UpdateTaskStatusRequest Model) : IRequest;
 
 public sealed class UpdateTaskStatusCommandHandler : IRequestHandler<UpdateTaskStatusCommand>
 {

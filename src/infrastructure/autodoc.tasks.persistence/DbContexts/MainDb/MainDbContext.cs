@@ -14,11 +14,11 @@ create migration: dotnet ef migrations add [NAME]
 update db: dotnet ef database update
 drop db: dotnet ef database drop
 revert migration:
-	-> dotnet ef database update<previous-migration-name>
+	-> dotnet ef database update <previous-migration-name>
 	-> dotnet ef migrations remove
 
 with separate project:
-	dotnet ef migrations add Init --startup-project..\..\presentation\autodoc.tasks.api\autodoc.tasks.api.csproj
+	dotnet ef migrations add Init --startup-project ..\..\presentation\autodoc.tasks.api\autodoc.tasks.api.csproj
 */
 
 public sealed class MainDbContext : DbContext, IMainDbContext
@@ -36,6 +36,7 @@ public sealed class MainDbContext : DbContext, IMainDbContext
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		modelBuilder.Entity<TaskStatusEntity>().HasIndex(x => x.Name).IsUnique();
+		modelBuilder.Entity<TaskFileEntity>().HasIndex(x => x.LocalStorageFileId).IsUnique();
 		base.OnModelCreating(modelBuilder);
 	}
 }

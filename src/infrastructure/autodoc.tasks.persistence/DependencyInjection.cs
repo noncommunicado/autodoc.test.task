@@ -1,5 +1,6 @@
 ﻿using autodoc.tasks.application.Common.Interfaces;
 using autodoc.tasks.persistence.DbContexts.MainDb;
+using autodoc.tasks.persistence.FileManagers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ public static class DependencyInjection
 	{
 		services.AddDbContext<IMainDbContext, MainDbContext>(x => x.UseSqlServer(
 			configuration.GetConnectionString("Main")));
+		services.AddScoped<ITaskFileManager, TaskFileManager>();
 		return services;
 	}
 }

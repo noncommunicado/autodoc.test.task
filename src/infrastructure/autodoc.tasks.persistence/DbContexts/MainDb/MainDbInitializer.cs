@@ -27,6 +27,37 @@ public class MainDbInitializer
 		await _context.Database.EnsureCreatedAsync();
 		if ((_configuration.GetSection("Database:IsInitOnStartup").Get<bool?>() ?? false) is false) return;
 		await InitTasksStatusesAsync();
+		await InitTasksAsync();
+	}
+
+	private async Task InitTasksAsync()
+	{
+		if(await _context.Tasks.AnyAsync()) return;
+		Random rand = new();
+		for (int i = 0; i < 30; i++)
+		{
+			List<TaskFileEntity> files = new(5);
+			for (int j = 0; j < rand.Next(0, 6); j++)
+			{
+				files.Add(new TaskFileEntity
+				{
+					FileName = $"test_{Guid.NewGuid():N}",
+					FileExtension = "txt",
+					LocalStorageFileId = Guid.NewGuid(),
+					Size = rand.Next(10, 10000)
+				});
+			}
+
+			await _context.Tasks.AddAsync(new TaskEntity
+			{
+				Name = $"Напоминание о встрече #{i+1}",
+				Created = DateTime.Now,
+				Updated = DateTime.Now,
+				StatusId = rand.Next(1, 5),
+				Files = files
+			});
+		}
+		await _context.SaveChangesAsync();
 	}
 
 	public async Task InitTasksStatusesAsync()
