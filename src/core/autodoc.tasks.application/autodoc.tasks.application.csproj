@@ -18,8 +18,4 @@
     <ProjectReference Include="..\autodoc.tasks.domain\autodoc.tasks.domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CQRS\TaskFile\Commands\" />
-  </ItemGroup>
-
 </Project>

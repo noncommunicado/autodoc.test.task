@@ -1,4 +1,5 @@
 ﻿using autodoc.tasks.application.Common.Interfaces;
+using autodoc.tasks.persistence.Archivator;
 using autodoc.tasks.persistence.DbContexts.MainDb;
 using autodoc.tasks.persistence.FileManagers;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ public static class DependencyInjection
 		services.AddDbContext<IMainDbContext, MainDbContext>(x => x.UseSqlServer(
 			configuration.GetConnectionString("Main")));
 		services.AddScoped<ITaskFileManager, TaskFileManager>();
+		services.AddScoped<IArchivatorService, ArchivatorService>();
 		return services;
 	}
 }

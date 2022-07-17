@@ -20,7 +20,8 @@ public sealed class GetTaskByIdQueryHandler : IRequestHandler<GetTaskByIdQuery, 
 		var entity = await _context.Tasks
 			.Include(x => x.Status)
 			.Include(x => x.Files)
-			.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+			.FirstOrDefaultAsync(x => x.Id == request.Id,
+				cancellationToken: cancellationToken);
 
 		return entity;
 	}

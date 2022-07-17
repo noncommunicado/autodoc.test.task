@@ -6,7 +6,6 @@ using autodoc.tasks.domain.Entities;
 using autodoc.tasks.domain.Http.Requests.Task;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 
 namespace autodoc.tasks.application.CQRS.Task.Commands;
 

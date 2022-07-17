@@ -44,7 +44,7 @@ public sealed class TaskController : ControllerBase
 	/// </summary>
 	[HttpPost]
 	[SwaggerResponse(200, type: typeof(int), description: "Created item Id")]
-	[RequestSizeLimit(314572800)] // 300mb
+	[RequestSizeLimit(104857600 * 3)] // 300mb limit for all files
 	public async Task<IActionResult> Create([FromForm] CreateTaskRequest model)
 	{
 		var createdId = await _mediator.Send(new CreateTaskCommand(model, model.Files));

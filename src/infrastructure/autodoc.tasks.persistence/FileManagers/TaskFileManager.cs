@@ -1,5 +1,4 @@
 ﻿using autodoc.tasks.application.Common.Interfaces;
-using autodoc.tasks.domain.Dto.TaskFile;
 using Microsoft.AspNetCore.Http;
 
 namespace autodoc.tasks.persistence.FileManagers;
@@ -12,12 +11,10 @@ public sealed class TaskFileManager : ITaskFileManager
 		=> StoreDirectory.GetFiles(fileName).FirstOrDefault() is null;
 
 	/// <exception cref="FileNotFoundException"></exception>
-	public async Task<FileStream> GetFileStreamAsync(TaskFileExtendedDto fileDto)
+	public FileStream GetFileStream(string fileName)
 	{
-		string fileName = fileDto.LocalStorageFileId.ToString("N");
 		FileInfo? fileInfo = StoreDirectory.GetFiles(fileName).FirstOrDefault();
 		if (fileInfo is null) throw new FileNotFoundException();
-
 		return fileInfo.OpenRead();
 	}
 
