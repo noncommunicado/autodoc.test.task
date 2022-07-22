@@ -16,5 +16,7 @@ public sealed class GetTaskStatusByIdQueryHandler : IRequestHandler<GetTaskStatu
 	}
 
 	public async Task<TaskStatusEntity?> Handle(GetTaskStatusByIdQuery request, CancellationToken cancellationToken)
-		=> await _context.TaskStatuses.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+		=> await _context.TaskStatuses
+			.AsNoTrackingWithIdentityResolution()
+			.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 }

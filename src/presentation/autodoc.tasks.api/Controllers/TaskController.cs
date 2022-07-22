@@ -1,4 +1,5 @@
-﻿using autodoc.tasks.application.CQRS.Task.Commands;
+﻿using System.Net;
+using autodoc.tasks.application.CQRS.Task.Commands;
 using autodoc.tasks.application.CQRS.Task.Queries;
 using autodoc.tasks.domain.Dto.Task;
 using autodoc.tasks.domain.Http.Requests.Task;
@@ -27,9 +28,11 @@ public sealed class TaskController : ControllerBase
 	/// </summary>
 	[HttpGet, Route("{id}")]
 	[SwaggerResponse(200, type: typeof(TaskDto))]
+	[SwaggerResponse((int)HttpStatusCode.NotFound)]
 	public async Task<IActionResult> Get(int id)
 	{
 		var entity = await _mediator.Send(new GetTaskByIdQuery(id));
+		if (entity is null) return NotFound();
 		return Ok(_mapper.Map<TaskDto>(entity));
 	}
 

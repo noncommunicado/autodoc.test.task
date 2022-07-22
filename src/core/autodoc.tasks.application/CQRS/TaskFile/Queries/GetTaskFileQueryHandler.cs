@@ -20,6 +20,7 @@ public sealed class GetTaskFileQueryHandler : IRequestHandler<GetTaskFileQuery, 
 	public async Task<(FileStream Stream, string FileName)> Handle(GetTaskFileQuery request, CancellationToken cancellationToken)
 	{
 		TaskFileEntity? entity = await _context.TaskFiles
+			.AsNoTrackingWithIdentityResolution()
 			.FirstOrDefaultAsync(x => x.Id == request.Id,
 			cancellationToken: cancellationToken);
 

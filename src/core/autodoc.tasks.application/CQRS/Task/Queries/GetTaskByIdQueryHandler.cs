@@ -18,6 +18,7 @@ public sealed class GetTaskByIdQueryHandler : IRequestHandler<GetTaskByIdQuery, 
 	public async Task<TaskEntity?> Handle(GetTaskByIdQuery request, CancellationToken cancellationToken)
 	{
 		var entity = await _context.Tasks
+			.AsNoTrackingWithIdentityResolution()
 			.Include(x => x.Status)
 			.Include(x => x.Files)
 			.FirstOrDefaultAsync(x => x.Id == request.Id,

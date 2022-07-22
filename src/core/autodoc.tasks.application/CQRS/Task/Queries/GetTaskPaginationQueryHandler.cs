@@ -24,6 +24,7 @@ public sealed class GetTaskPaginationQueryHandler : IRequestHandler<GetTaskPagin
 	{
 		var model = request.Model;
 		var items = _context.Tasks
+			.AsNoTrackingWithIdentityResolution()
 			.Include(x => x.Files)
 			.Include(x => x.Status)
 			.Where(x => model.From == null || x.Created >= model.From)

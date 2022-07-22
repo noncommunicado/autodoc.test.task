@@ -18,6 +18,7 @@ public sealed class GetAllTaskStatusesQueryHandler : IRequestHandler<GetAllTaskS
 	public async Task<IEnumerable<TaskStatusEntity>> Handle(GetAllTaskStatusesQuery request,
 		CancellationToken cancellationToken)
 		=> await _context.TaskStatuses
+			.AsNoTrackingWithIdentityResolution()
 			.Where(x => request.SearchFilter == null || (
 					x.Name.ToLower().Contains(request.SearchFilter.ToLower()) || x.EnAlias.ToLower().Contains(request.SearchFilter.ToLower())
 				))
